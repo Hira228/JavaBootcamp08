@@ -16,7 +16,7 @@
         </bean>
 
         <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-                <property name="dataSourceClassName" value="${hikari.dataSourceClassName}"/>
+
                 <property name="username" value="${hikari.username}"/>
                 <property name="password" value="${hikari.password}"/>
                 <property name="jdbcUrl" value="${hikari.jdbcUrl}"/>
@@ -38,8 +38,12 @@
                 <constructor-arg ref = "dataSourceDriverManager"/>
         </bean>
 
-        <bean id = "usersRepositoryJdbcImpl" class = "edu.school21.models.UsersRepositoryJdbcTemplateImpl">
+        <bean id = "UsersRepositoryJdbcTemplateImpl" class = "edu.school21.models.UsersRepositoryJdbcTemplateImpl">
                 <constructor-arg ref="jdbcTemplate"/>
+        </bean>
+
+        <bean id = "usersRepositoryJdbcImpl" class = "edu.school21.models.UsersRepositoryJdbcImpl">
+                <constructor-arg ref="dataSourceHikari"/>
         </bean>
 
 </beans>
