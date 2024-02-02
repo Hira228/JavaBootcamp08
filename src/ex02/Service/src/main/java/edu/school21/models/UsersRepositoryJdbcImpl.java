@@ -1,8 +1,11 @@
 package edu.school21.models;
 
-import com.zaxxer.hikari.HikariDataSource;
 import edu.school21.repositories.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component("usersRepositoryJdbcImpl")
 public class UsersRepositoryJdbcImpl implements UsersRepository<User> {
-    HikariDataSource hikariDataSource;
+    DataSource hikariDataSource;
 
-    public UsersRepositoryJdbcImpl(HikariDataSource hikariDataSource) {
+    @Autowired
+    public UsersRepositoryJdbcImpl(@Qualifier("dataSourceHikari") DataSource hikariDataSource) {
         this.hikariDataSource = hikariDataSource;
     }
 

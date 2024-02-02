@@ -1,21 +1,27 @@
 package edu.school21.models;
 
 import edu.school21.repositories.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component("usersRepositoryJdbcTemplateImpl")
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository<User> {
     JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryJdbcTemplateImpl(DriverManagerDataSource driverManagerDataSource) {
+    @Autowired
+    public UsersRepositoryJdbcTemplateImpl(@Qualifier("driverManagerDataSource") DataSource driverManagerDataSource) {
         this.jdbcTemplate = new JdbcTemplate(driverManagerDataSource);
     }
 
