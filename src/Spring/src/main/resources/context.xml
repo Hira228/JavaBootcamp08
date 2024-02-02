@@ -34,12 +34,8 @@
                 <constructor-arg ref="hikariConfig"/>
         </bean>
 
-        <bean id = "jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-                <constructor-arg ref = "dataSourceDriverManager"/>
-        </bean>
-
         <bean id = "UsersRepositoryJdbcTemplateImpl" class = "edu.school21.models.UsersRepositoryJdbcTemplateImpl">
-                <constructor-arg ref="jdbcTemplate"/>
+                <constructor-arg ref = "dataSourceDriverManager"/>
         </bean>
 
         <bean id = "usersRepositoryJdbcImpl" class = "edu.school21.models.UsersRepositoryJdbcImpl">

@@ -4,6 +4,7 @@ import edu.school21.repositories.UsersRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +15,8 @@ import java.util.Optional;
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository<User> {
     JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public UsersRepositoryJdbcTemplateImpl(DriverManagerDataSource driverManagerDataSource) {
+        this.jdbcTemplate = new JdbcTemplate(driverManagerDataSource);
     }
 
     @Override
